@@ -3,9 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contacto — Pytr</title>
+  <title>Contacto — Pytr | Desarrollo Web &amp; Software</title>
+  <meta name="description" content="Cuéntame tu proyecto: te respondo en menos de 24 horas con una propuesta sin costo. Desarrollo web y software en Martínez de la Torre, Veracruz." />
+  <meta name="theme-color" content="#07070f" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Contacto — Pytr" />
+  <meta property="og:description" content="Cuéntame tu proyecto: propuesta sin costo en menos de 24 horas." />
+  <meta property="og:locale" content="es_MX" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #07070f;
@@ -14,7 +21,7 @@
       --border: rgba(255,255,255,0.07);
       --border-hover: rgba(139,92,246,0.5);
       --text: #e2e8f0;
-      --muted: #64748b;
+      --muted: #94a3b8; /* contraste AA sobre fondo oscuro */
       --accent: #8b5cf6;
       --accent2: #06b6d4;
       --green: #22c55e;
@@ -23,6 +30,22 @@
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
+    /* ── ACCESIBILIDAD ── */
+    .skip-link {
+      position: absolute; top: -100px; left: 1rem;
+      background: var(--accent); color: #fff;
+      padding: 0.6rem 1.2rem; border-radius: 0 0 10px 10px;
+      text-decoration: none; font-weight: 600; font-size: 0.9rem;
+      z-index: 200;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
 
     body {
       background: var(--bg);
@@ -113,6 +136,14 @@
       font-size: 0.93rem;
       margin-bottom: 2rem;
       line-height: 1.6;
+    }
+
+    /* Honeypot anti-spam: oculto para humanos, visible para bots */
+    .hp-field {
+      position: absolute;
+      left: -9999px;
+      width: 1px; height: 1px;
+      overflow: hidden;
     }
 
     .form-grid {
@@ -237,25 +268,29 @@
 </head>
 <body>
 
-  <nav>
-    <a href="index.html" class="logo">Pytr</a>
+  <a href="#main" class="skip-link">Saltar al contenido</a>
+
+  <nav aria-label="Navegación principal">
+    <a href="index.html" class="logo" aria-label="Pytr — ir al inicio">Pytr</a>
     <a href="index.html" class="nav-back">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
         <polyline points="15,18 9,12 15,6"/>
       </svg>
       Volver
     </a>
   </nav>
 
-  <main>
+  <main id="main">
     <div class="form-card">
-      <p class="form-label-top">// contacto</p>
+      <p class="form-label-top" aria-hidden="true">// contacto</p>
       <h1 class="form-title">Cuéntame tu<br /><span class="gradient-text">proyecto</span></h1>
       <p class="form-subtitle">Te respondo en menos de 24 horas con una propuesta sin costo.</p>
 
       <form class="form-grid" name="contacto" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contactoForm">
         <input type="hidden" name="form-name" value="contacto" />
-        <input type="hidden" name="bot-field" />
+        <p class="hp-field" aria-hidden="true">
+          <label>No llenar este campo: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        </p>
 
         <div class="form-row">
           <div class="form-group">
@@ -281,15 +316,15 @@
         <button class="form-submit" type="submit">Enviar mensaje →</button>
       </form>
 
-      <div class="form-success" id="formSuccess">
-        <div class="form-success-icon">✓</div>
+      <div class="form-success" id="formSuccess" role="status" tabindex="-1">
+        <div class="form-success-icon" aria-hidden="true">✓</div>
         <div class="form-success-text">¡Mensaje enviado!</div>
         <div class="form-success-sub">Te respondo pronto a tu correo.</div>
       </div>
     </div>
   </main>
 
-  <footer>© 2026 · Martínez de la Torre, Veracruz · Desarrollo Web & Software</footer>
+  <footer>© 2026 · Martínez de la Torre, Veracruz · Desarrollo Web &amp; Software</footer>
 
   <script>
     const form = document.getElementById('contactoForm');
@@ -299,9 +334,15 @@
       e.preventDefault();
       const data = new FormData(form);
       try {
-        await fetch('/', { method: 'POST', body: data });
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(data).toString()
+        });
+        if (!res.ok) throw new Error('Error ' + res.status);
         form.style.display = 'none';
         success.classList.add('visible');
+        success.focus();
       } catch (err) {
         alert('Hubo un error, intenta de nuevo.');
       }
