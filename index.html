@@ -145,11 +145,10 @@
 
     /* ── HERO ── */
     .hero {
-      min-height: 100vh;
       display: flex; flex-direction: column;
       justify-content: center; align-items: center;
       text-align: center;
-      padding: 8rem 2rem 6rem;
+      padding: 8.5rem 2rem 3.5rem;
       position: relative; overflow: hidden;
     }
     .hero h1 {
@@ -197,24 +196,6 @@
     }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-    /* Hero scroll hint */
-    .scroll-hint {
-      position: absolute; bottom: 2.5rem;
-      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-      color: var(--muted); font-size: 0.75rem; letter-spacing: 1px;
-      animation: fadeInUp 1s 1.5s both;
-    }
-    .scroll-arrow {
-      width: 20px; height: 20px;
-      border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
-      transform: rotate(45deg);
-      animation: bounce 2s ease-in-out infinite;
-    }
-    @keyframes bounce {
-      0%,100% { transform: rotate(45deg) translateY(0); }
-      50% { transform: rotate(45deg) translateY(5px); }
-    }
-
     /* ── SECTION WRAPPER ── */
     .section-wrap {
       padding: 6rem 2rem;
@@ -239,6 +220,7 @@
 
     /* ── SERVICES ── */
     #servicios { background: linear-gradient(180deg, transparent, rgba(139,92,246,0.03) 50%, transparent); }
+    #servicios .section-wrap { padding-top: 3.5rem; }
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -448,10 +430,11 @@
     .fade-up.delay-3 { transition-delay: 0.3s; }
     .fade-up.delay-4 { transition-delay: 0.4s; }
 
-    /* ── STATS ROW ── */
+    /* ── STATS ROW (en el hero) ── */
     .stats-row {
       display: flex; gap: 3rem; flex-wrap: wrap;
-      margin-top: 4rem; padding-top: 3rem;
+      width: 100%; max-width: 560px;
+      margin: 3rem auto 0; padding-top: 2rem;
       border-top: 1px solid var(--border);
       justify-content: center;
     }
@@ -524,10 +507,8 @@
       nav { padding: 0.85rem 1.25rem; height: 58px; }
       .mobile-menu { top: 58px; }
 
-      /* Hero — usa svh para manejar la barra de Safari en iOS */
       .hero {
-        min-height: 100svh;
-        padding: 5.5rem 1.25rem 3.5rem;
+        padding: 5.5rem 1.25rem 2.5rem;
       }
       .hero h1 {
         font-size: clamp(2.4rem, 10vw, 3.8rem);
@@ -535,7 +516,6 @@
         margin-bottom: 1.2rem;
       }
       .hero p { font-size: 0.95rem; margin-bottom: 2rem; }
-      .scroll-hint { display: none; }
 
       /* Orbs más pequeños para no causar scroll */
       .orb-1 { width: 280px; height: 280px; top: -80px; left: -100px; }
@@ -645,8 +625,19 @@
       <a href="#portafolio" class="btn-secondary">Ver portafolio</a>
     </div>
 
-    <div class="scroll-hint" aria-hidden="true">
-      <div class="scroll-arrow"></div>
+    <div class="stats-row">
+      <div class="stat fade-up delay-1">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Proyectos completados</div>
+      </div>
+      <div class="stat fade-up delay-2">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Proyectos entregados</div>
+      </div>
+      <div class="stat fade-up delay-3">
+        <div class="stat-number">MTT</div>
+        <div class="stat-label">Martínez de la Torre, Ver.</div>
+      </div>
     </div>
   </section>
 
@@ -688,21 +679,6 @@
           <p class="service-price">$20,000 <span class="service-price-label">MXN</span></p>
         </div>
 
-      </div>
-
-      <div class="stats-row">
-        <div class="stat fade-up delay-1">
-          <div class="stat-number">4</div>
-          <div class="stat-label">Proyectos completados</div>
-        </div>
-        <div class="stat fade-up delay-2">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Proyectos entregados</div>
-        </div>
-        <div class="stat fade-up delay-3">
-          <div class="stat-number">MTT</div>
-          <div class="stat-label">Martínez de la Torre, Ver.</div>
-        </div>
       </div>
     </div>
   </section>
