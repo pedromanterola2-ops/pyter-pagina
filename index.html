@@ -314,6 +314,12 @@
       font-size: 3.5rem; z-index: 1; position: relative;
       filter: drop-shadow(0 4px 16px rgba(0,0,0,0.4));
     }
+    .project-thumb img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      z-index: 0;
+    }
     .project-thumb-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(180deg, transparent 30%, var(--bg) 100%);
@@ -697,8 +703,8 @@
         <a class="project-card-link fade-up delay-1" href="https://limart-mdt-v8.vercel.app" target="_blank" rel="noopener noreferrer">
           <div class="project-card">
             <div class="project-thumb" style="background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #0d7a55 100%);">
+              <img src="img/limon-app.png" alt="App Limón Persa" />
               <div class="project-thumb-overlay"></div>
-              <div class="project-thumb-emoji" aria-hidden="true">🍋</div>
             </div>
             <div class="project-info">
               <div class="project-tags">
@@ -715,8 +721,8 @@
         <a class="project-card-link fade-up delay-2" href="https://centinelatactico.com" target="_blank" rel="noopener noreferrer">
           <div class="project-card">
             <div class="project-thumb" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+              <img src="img/militar.png" alt="Página Militar" />
               <div class="project-thumb-overlay"></div>
-              <div class="project-thumb-emoji" aria-hidden="true">⚔️</div>
             </div>
             <div class="project-info">
               <div class="project-tags">
@@ -748,8 +754,8 @@
         <a class="project-card-link fade-up delay-4" href="https://enmartinez-directorio.vercel.app" target="_blank" rel="noopener noreferrer">
           <div class="project-card">
             <div class="project-thumb" style="background: linear-gradient(135deg, #0c1445 0%, #1e3a8a 50%, #1d4ed8 100%);">
+              <img src="img/catalogo.png" alt="Catálogo Digital" />
               <div class="project-thumb-overlay"></div>
-              <div class="project-thumb-emoji" aria-hidden="true">📖</div>
             </div>
             <div class="project-info">
               <div class="project-tags">
