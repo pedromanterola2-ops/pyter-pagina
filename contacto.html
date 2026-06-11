@@ -286,10 +286,12 @@
       <h1 class="form-title">Cuéntame tu<br /><span class="gradient-text">proyecto</span></h1>
       <p class="form-subtitle">Te respondo en menos de 24 horas con una propuesta sin costo.</p>
 
-      <form class="form-grid" name="contacto" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contactoForm">
-        <input type="hidden" name="form-name" value="contacto" />
+      <form class="form-grid" method="POST" id="contactoForm">
+        <input type="hidden" name="_subject" value="Nuevo mensaje desde tu página Pytr" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
         <p class="hp-field" aria-hidden="true">
-          <label>No llenar este campo: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+          <label>No llenar este campo: <input name="_honey" tabindex="-1" autocomplete="off" /></label>
         </p>
 
         <div class="form-row">
@@ -330,21 +332,22 @@
     const form = document.getElementById('contactoForm');
     const success = document.getElementById('formSuccess');
 
+    // Envío vía FormSubmit (funciona en cualquier hosting, llega a tu correo)
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const data = new FormData(form);
       try {
-        const res = await fetch('/', {
+        const res = await fetch('https://formsubmit.co/ajax/pedromanterola2@gmail.com', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(data).toString()
+          headers: { 'Accept': 'application/json' },
+          body: data
         });
         if (!res.ok) throw new Error('Error ' + res.status);
         form.style.display = 'none';
         success.classList.add('visible');
         success.focus();
       } catch (err) {
-        alert('Hubo un error, intenta de nuevo.');
+        alert('Hubo un error, intenta de nuevo o escríbeme por WhatsApp.');
       }
     });
   </script>

@@ -152,26 +152,6 @@
       padding: 8rem 2rem 6rem;
       position: relative; overflow: hidden;
     }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.4rem 1.1rem;
-      border: 1px solid var(--border);
-      border-radius: 100px; font-size: 0.78rem;
-      color: var(--muted); letter-spacing: 0.3px;
-      backdrop-filter: blur(10px);
-      background: rgba(255,255,255,0.02);
-      margin-bottom: 2.2rem;
-    }
-    .badge-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 6px var(--green);
-      animation: glow 2s ease-in-out infinite;
-    }
-    @keyframes glow {
-      0%,100% { opacity:1; box-shadow: 0 0 6px var(--green); }
-      50% { opacity:0.5; box-shadow: 0 0 2px var(--green); }
-    }
     .hero h1 {
       font-size: clamp(2.8rem, 9vw, 6.5rem);
       font-weight: 900; line-height: 1.05; letter-spacing: -3px;
@@ -555,7 +535,6 @@
         margin-bottom: 1.2rem;
       }
       .hero p { font-size: 0.95rem; margin-bottom: 2rem; }
-      .hero-badge { font-size: 0.72rem; margin-bottom: 1.5rem; }
       .scroll-hint { display: none; }
 
       /* Orbs más pequeños para no causar scroll */
@@ -649,10 +628,6 @@
   <section class="hero">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
-
-    <div class="hero-badge">
-      Disponible para nuevos proyectos
-    </div>
 
     <h1>
       Desarrollo<br />
