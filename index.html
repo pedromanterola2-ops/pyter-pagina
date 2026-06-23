@@ -340,8 +340,10 @@
       display: flex; gap: 2px;
     }
     .project-thumb-dual img {
+      position: relative; inset: auto;
       width: 50%; height: 100%;
       object-fit: cover; object-position: center top;
+      flex-shrink: 0;
     }
     .project-info { padding: 1.5rem; }
     .project-tags {
