@@ -268,7 +268,7 @@
     }
     .service-desc {
       font-size: 0.85rem; color: var(--muted);
-      line-height: 1.65; margin-bottom: 1.75rem;
+      line-height: 1.65;
       flex: 1;
       position: relative;
     }
@@ -278,6 +278,8 @@
       background: var(--gradient);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       position: relative;
+      margin-top: auto;
+      padding-top: 1.75rem;
     }
     .service-price-label {
       font-family: 'Inter', sans-serif;
@@ -331,7 +333,15 @@
     .project-thumb-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(180deg, transparent 30%, var(--bg) 100%);
-      z-index: 0;
+      z-index: 1;
+    }
+    .project-thumb-dual {
+      position: absolute; inset: 0;
+      display: flex; gap: 2px;
+    }
+    .project-thumb-dual img {
+      width: 50%; height: 100%;
+      object-fit: cover; object-position: center top;
     }
     .project-info { padding: 1.5rem; }
     .project-tags {
@@ -758,8 +768,11 @@
 
         <div class="project-card fade-up delay-3">
           <div class="project-thumb" style="background: linear-gradient(135deg, #451a03 0%, #7c2d12 50%, #9a3412 100%);">
+            <div class="project-thumb-dual">
+              <img src="img/queseria-1.png" alt="Software Quesería - Dashboard" />
+              <img src="img/queseria-2.png" alt="Software Quesería - Ventas" />
+            </div>
             <div class="project-thumb-overlay"></div>
-            <div class="project-thumb-emoji" aria-hidden="true">🧀</div>
           </div>
           <div class="project-info">
             <div class="project-tags">
