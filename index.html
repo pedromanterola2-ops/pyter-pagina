@@ -345,6 +345,63 @@
       object-fit: cover; object-position: center top;
       flex-shrink: 0;
     }
+
+    /* ── LIGHTBOX ── */
+    .lightbox-trigger { cursor: pointer; }
+    .lightbox-trigger .project-thumb::after {
+      content: '🔍 Ver imágenes';
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0);
+      color: #fff; font-size: 0.85rem; font-weight: 600;
+      opacity: 0; z-index: 2;
+      transition: opacity 0.25s, background 0.25s;
+      letter-spacing: 0.3px;
+    }
+    .lightbox-trigger:hover .project-thumb::after {
+      opacity: 1;
+      background: rgba(0,0,0,0.45);
+    }
+    #lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 9000;
+      align-items: center; justify-content: center;
+      flex-direction: column;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox-img {
+      max-width: 90vw; max-height: 80vh;
+      border-radius: 12px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+      object-fit: contain;
+      transition: opacity 0.2s;
+    }
+    #lightbox-counter {
+      margin-top: 1rem;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem; font-family: 'JetBrains Mono', monospace;
+    }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff; border-radius: 50%;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1.1rem;
+      transition: background 0.2s;
+    }
+    .lightbox-nav:hover { background: rgba(139,92,246,0.35); }
+    #lightbox-prev { left: 1.5rem; }
+    #lightbox-next { right: 1.5rem; }
+    #lightbox-close {
+      position: absolute; top: 1.25rem; right: 1.5rem;
+      background: none; border: none; color: rgba(255,255,255,0.6);
+      font-size: 1.6rem; cursor: pointer; line-height: 1;
+      transition: color 0.2s;
+    }
+    #lightbox-close:hover { color: #fff; }
     .project-info { padding: 1.5rem; }
     .project-tags {
       display: flex; gap: 0.4rem;
@@ -768,7 +825,7 @@
           </div>
         </a>
 
-        <div class="project-card fade-up delay-3">
+        <div class="project-card lightbox-trigger fade-up delay-3" id="queseria-card" role="button" tabindex="0" aria-label="Ver imágenes del Software Quesería">
           <div class="project-thumb" style="background: linear-gradient(135deg, #451a03 0%, #7c2d12 50%, #9a3412 100%);">
             <div class="project-thumb-dual">
               <img src="img/queseria-1.png" alt="Software Quesería - Dashboard" />
@@ -783,6 +840,7 @@
             </div>
             <h3 class="project-name">Software Quesería</h3>
             <p class="project-desc">Sistema personalizado para una quesería local. Control de producción, inventario de insumos y registro de ventas.</p>
+            <span class="project-link-hint">Ver imágenes →</span>
           </div>
         </div>
 
@@ -840,6 +898,15 @@
 
   </main>
 
+  <!-- LIGHTBOX QUESERÍA -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Imágenes Software Quesería">
+    <button id="lightbox-close" aria-label="Cerrar">×</button>
+    <button class="lightbox-nav" id="lightbox-prev" aria-label="Anterior">‹</button>
+    <img id="lightbox-img" src="" alt="" />
+    <p id="lightbox-counter"></p>
+    <button class="lightbox-nav" id="lightbox-next" aria-label="Siguiente">›</button>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">Pytr</div>
@@ -891,6 +958,49 @@
     window.addEventListener('scroll', () => {
       mainNav.classList.toggle('scrolled', window.scrollY > 50);
     }, { passive: true });
+
+    // ── LIGHTBOX QUESERÍA ──
+    const lbImages = ['img/queseria-1.png', 'img/queseria-2.png'];
+    const lbAlts   = ['Software Quesería - Dashboard', 'Software Quesería - Gráfica'];
+    let lbIndex = 0;
+    const lightbox    = document.getElementById('lightbox');
+    const lbImg       = document.getElementById('lightbox-img');
+    const lbCounter   = document.getElementById('lightbox-counter');
+    const lbClose     = document.getElementById('lightbox-close');
+    const lbPrev      = document.getElementById('lightbox-prev');
+    const lbNext      = document.getElementById('lightbox-next');
+
+    function lbShow(i) {
+      lbIndex = (i + lbImages.length) % lbImages.length;
+      lbImg.src = lbImages[lbIndex];
+      lbImg.alt = lbAlts[lbIndex];
+      lbCounter.textContent = (lbIndex + 1) + ' / ' + lbImages.length;
+    }
+    function lbOpen(i = 0) {
+      lbShow(i);
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      lbClose.focus();
+    }
+    function lbCloseFn() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('queseria-card').addEventListener('click', () => lbOpen(0));
+    document.getElementById('queseria-card').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); lbOpen(0); }
+    });
+    lbClose.addEventListener('click', lbCloseFn);
+    lbPrev.addEventListener('click', (e) => { e.stopPropagation(); lbShow(lbIndex - 1); });
+    lbNext.addEventListener('click', (e) => { e.stopPropagation(); lbShow(lbIndex + 1); });
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lbCloseFn(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') lbCloseFn();
+      if (e.key === 'ArrowLeft')  lbShow(lbIndex - 1);
+      if (e.key === 'ArrowRight') lbShow(lbIndex + 1);
+    });
 
     // ── HAMBURGER MENU ──
     const hamburger = document.getElementById('hamburger');
