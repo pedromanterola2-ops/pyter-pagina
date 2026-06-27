@@ -30,13 +30,14 @@
       "addressRegion": "Veracruz",
       "addressCountry": "MX"
     },
-    "priceRange": "$2,000 - $15,000 MXN"
+    "priceRange": "$2,000 - $14,000 MXN"
   }
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" /></noscript>
   <style>
     :root {
       --bg: #07070f;
@@ -771,7 +772,7 @@
           <div class="service-icon" aria-hidden="true">📱</div>
           <h3 class="service-name">Aplicación Completa</h3>
           <p class="service-desc">App web o móvil con base de datos, usuarios, panel de administración y más.</p>
-          <p class="service-price">$15,000 <span class="service-price-label">MXN · + $399/mes mantenimiento</span></p>
+          <p class="service-price">$14,000 <span class="service-price-label">MXN · + $399/mes mantenimiento</span></p>
         </div>
 
       </div>
@@ -1082,7 +1083,39 @@
 
       resize();
       window.addEventListener('resize', resize);
-      setInterval(draw, 50);
+
+      // Usar requestAnimationFrame en lugar de setInterval (más eficiente)
+      let animId = null;
+      let lastTime = 0;
+      const FRAME_MS = 1000 / 20; // 20fps
+
+      function loop(ts) {
+        animId = requestAnimationFrame(loop);
+        if (ts - lastTime < FRAME_MS) return;
+        lastTime = ts;
+        draw();
+      }
+
+      // Pausar cuando el hero no es visible (usuario scrolleó)
+      const heroObs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          if (!animId) loop(0);
+        } else {
+          cancelAnimationFrame(animId);
+          animId = null;
+        }
+      }, { threshold: 0.05 });
+      heroObs.observe(hero);
+
+      // Pausar cuando el tab está en segundo plano
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          cancelAnimationFrame(animId);
+          animId = null;
+        } else if (hero.getBoundingClientRect().top < window.innerHeight) {
+          loop(0);
+        }
+      });
     })();
   </script>
 </body>
