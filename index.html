@@ -296,7 +296,8 @@
       font-size: 0.78rem;
       color: var(--muted);
       line-height: 1.5;
-      min-height: 3em;
+      /* 2 líneas de texto + padding + borde (box-sizing: border-box) */
+      min-height: calc(3em + 0.85rem + 1px);
     }
     .service-maintenance strong {
       font-family: 'JetBrains Mono', monospace;
