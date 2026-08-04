@@ -30,7 +30,7 @@
       "addressRegion": "Veracruz",
       "addressCountry": "MX"
     },
-    "priceRange": "$2,000 - $11,000 MXN"
+    "priceRange": "$2,000 - $12,000 MXN"
   }
   </script>
 
@@ -529,22 +529,13 @@
     .fade-up.delay-3 { transition-delay: 0.3s; }
     .fade-up.delay-4 { transition-delay: 0.4s; }
 
-    /* ── STATS ROW (en el hero) ── */
-    .stats-row {
-      display: flex; gap: 3rem; flex-wrap: wrap;
+    /* ── HERO TAGLINE ── */
+    .hero-tagline {
       width: 100%; max-width: 560px;
       margin: 3rem auto 0; padding-top: 2rem;
       border-top: 1px solid var(--border);
-      justify-content: center;
-    }
-    .stat { text-align: center; }
-    .stat-number {
-      font-size: 2.5rem; font-weight: 900; letter-spacing: -2px;
-      background: var(--gradient);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .stat-label {
-      font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem;
+      text-align: center;
+      font-size: 0.85rem; color: var(--muted);
     }
 
     /* ── HAMBURGER ── */
@@ -654,10 +645,8 @@
       .service-price { font-size: 1.35rem; }
       .service-price-label { font-size: 0.7rem; }
 
-      /* Stats */
-      .stats-row { gap: 1.5rem; margin-top: 2.5rem; padding-top: 2rem; }
-      .stat-number { font-size: 1.8rem; }
-      .stat-label { font-size: 0.75rem; }
+      /* Hero tagline */
+      .hero-tagline { margin-top: 2.5rem; padding-top: 2rem; }
 
       /* Portafolio — 1 columna */
       .portfolio-grid { grid-template-columns: 1fr; gap: 1rem; }
@@ -684,7 +673,6 @@
       .section-title { font-size: 1.5rem; }
       .logo { font-size: 1.3rem; }
       .service-price { font-size: 1.2rem; }
-      .stats-row { flex-direction: column; align-items: center; gap: 1.2rem; }
     }
   </style>
 </head>
@@ -736,20 +724,7 @@
       <a href="#portafolio" class="btn-secondary">Ver portafolio</a>
     </div>
 
-    <div class="stats-row">
-      <div class="stat fade-up delay-1">
-        <div class="stat-number">4</div>
-        <div class="stat-label">Proyectos completados</div>
-      </div>
-      <div class="stat fade-up delay-2">
-        <div class="stat-number">100%</div>
-        <div class="stat-label">Proyectos entregados</div>
-      </div>
-      <div class="stat fade-up delay-3">
-        <div class="stat-number">MTT</div>
-        <div class="stat-label">Martínez de la Torre, Ver.</div>
-      </div>
-    </div>
+    <p class="hero-tagline fade-up delay-1">Entregas en 4 días · Soporte Local · Código Propio</p>
   </section>
 
   <!-- SERVICES -->
@@ -766,7 +741,7 @@
           <h3 class="service-name">Landing Page</h3>
           <p class="service-desc">Página de presentación de una sola pantalla. Diseño moderno, rápida y lista para captar clientes.</p>
           <p class="service-price">$2,000 <span class="service-price-label">MXN · entrega en 3–5 días</span></p>
-          <p class="service-maintenance">Sin cuota mensual</p>
+          <p class="service-maintenance">+ <strong>$200 MXN</strong> / mes de mantenimiento</p>
         </div>
 
         <div class="service-card fade-up delay-2">
@@ -775,7 +750,7 @@
           <h3 class="service-name">Página Web Completa</h3>
           <p class="service-desc">Sitio con múltiples secciones navegables, diseño personalizado y adaptable a móvil y escritorio.</p>
           <p class="service-price">$4,000 <span class="service-price-label">MXN · entrega en 1–2 semanas</span></p>
-          <p class="service-maintenance">+ <strong>$100 MXN</strong> / mes de mantenimiento</p>
+          <p class="service-maintenance">+ <strong>$300 MXN</strong> / mes de mantenimiento</p>
         </div>
 
         <div class="service-card fade-up delay-3">
@@ -783,15 +758,15 @@
           <h3 class="service-name">Software Personalizado</h3>
           <p class="service-desc">Sistema a la medida de tu negocio: inventario, gestión, reportes, lo que necesites.</p>
           <p class="service-price">$8,000 <span class="service-price-label">MXN</span></p>
-          <p class="service-maintenance">+ <strong>$100 MXN</strong> / mes de mantenimiento</p>
+          <p class="service-maintenance">+ <strong>$300 MXN</strong> / mes de mantenimiento</p>
         </div>
 
         <div class="service-card fade-up delay-4">
           <div class="service-icon" aria-hidden="true">📱</div>
           <h3 class="service-name">Aplicación Completa</h3>
           <p class="service-desc">App web o móvil con base de datos, usuarios, panel de administración y más.</p>
-          <p class="service-price">$11,000 <span class="service-price-label">MXN</span></p>
-          <p class="service-maintenance">+ <strong>$200 MXN</strong> / mes de mantenimiento</p>
+          <p class="service-price">$12,000 <span class="service-price-label">MXN</span></p>
+          <p class="service-maintenance">+ <strong>$500 MXN</strong> / mes de mantenimiento</p>
         </div>
 
       </div>
