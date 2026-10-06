@@ -1,2 +1,6 @@
 # Local Netlify folder
 .netlify
+
+# Respaldos y temporales locales
+index-old.html
+_to_delete/

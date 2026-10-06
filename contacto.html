@@ -5,27 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contacto — Pytr | Desarrollo Web &amp; Software</title>
   <meta name="description" content="Cuéntame tu proyecto: te respondo en menos de 24 horas con una propuesta sin costo. Desarrollo web y software en Martínez de la Torre, Veracruz." />
-  <meta name="theme-color" content="#07070f" />
+  <meta name="theme-color" content="#08080d" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Contacto — Pytr" />
   <meta property="og:description" content="Cuéntame tu proyecto: propuesta sin costo en menos de 24 horas." />
   <meta property="og:locale" content="es_MX" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #07070f;
-      --bg2: #0d0d1c;
-      --card: rgba(255,255,255,0.025);
-      --border: rgba(255,255,255,0.07);
+      --bg: #08080d;
+      --bg2: #111119;
+      --card: #111119;
+      --border: rgba(255,255,255,0.12);
       --border-hover: rgba(139,92,246,0.5);
-      --text: #e2e8f0;
-      --muted: #94a3b8; /* contraste AA sobre fondo oscuro */
+      --text: #ececf3;
+      --muted: #9d9eb3; /* contraste AA sobre fondo oscuro */
       --accent: #8b5cf6;
-      --accent2: #06b6d4;
+      --accent2: #22d3ee;
       --green: #22c55e;
-      --gradient: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+      --gradient: linear-gradient(120deg, #8b5cf6 0%, #22d3ee 100%);
+      --display: 'Bricolage Grotesque', system-ui, sans-serif;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -50,7 +51,7 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Geist', system-ui, sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -264,6 +265,29 @@
       .form-row { grid-template-columns: 1fr; }
       .form-title { font-size: 1.6rem; }
     }
+
+    /* ── Estilo v2 ── */
+    body { position: relative; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; width: 620px; height: 620px; top: -160px; left: -180px; border-radius: 50%; filter: blur(90px); background: radial-gradient(circle, rgba(139,92,246,.22), transparent 70%); pointer-events: none; z-index: -1; }
+    body::after { display: none; }
+    nav { top: 14px; left: 50%; transform: translateX(-50%); width: min(calc(100% - 2rem), 920px); padding: .6rem .7rem .6rem 1.25rem; border: 1px solid rgba(255,255,255,.08); border-radius: 999px; background: rgba(17,17,25,.75); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%); }
+    .logo { font-family: var(--display); font-weight: 800; font-size: 1.45rem; letter-spacing: -0.04em; background-clip: text; }
+    .nav-back { padding: .5rem 1rem; border-radius: 999px; border: 1px solid var(--border); font-weight: 500; }
+    .nav-back:hover { border-color: var(--accent); }
+    .form-card { border-radius: 22px; padding: 2.75rem; box-shadow: 0 40px 80px -30px rgba(0,0,0,.8), 0 0 80px -30px rgba(139,92,246,.35); animation: cardIn .8s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes cardIn { from { opacity: 0; transform: translateY(20px); } }
+    .form-title { font-family: var(--display); font-weight: 800; font-size: clamp(2.2rem, 6vw, 2.8rem); letter-spacing: -0.035em; line-height: 1; margin-bottom: .8rem; }
+    .form-subtitle { font-size: 1rem; }
+    .form-group label { font-size: .88rem; color: var(--text); letter-spacing: 0; }
+    .form-input, .form-textarea { border-radius: 12px; border-color: rgba(255,255,255,.1); font-size: .98rem; padding: .85rem 1rem; }
+    .form-input:focus, .form-textarea:focus { box-shadow: 0 0 0 4px rgba(139,92,246,.15); }
+    .form-submit { border-radius: 999px; padding: 1rem; font-size: 1rem; box-shadow: 0 8px 30px -8px rgba(139,92,246,.7); }
+    .alt-wa { margin-top: 1.4rem; text-align: center; color: var(--muted); font-size: .92rem; }
+    .alt-wa a { color: #25d366; font-weight: 600; text-decoration: none; }
+    .alt-wa a:hover { text-decoration: underline; }
+    footer { border-top: 0; }
+    @media (prefers-reduced-motion: reduce) { .form-card { animation: none; } }
+    @media (max-width: 480px) { .form-card { padding: 2rem 1.4rem; } }
   </style>
 </head>
 <body>
@@ -282,8 +306,7 @@
 
   <main id="main">
     <div class="form-card">
-      <p class="form-label-top" aria-hidden="true">// contacto</p>
-      <h1 class="form-title">Cuéntame tu<br /><span class="gradient-text">proyecto</span></h1>
+      <h1 class="form-title">Cuéntame tu proyecto</h1>
       <p class="form-subtitle">Te respondo en menos de 24 horas con una propuesta sin costo.</p>
 
       <form class="form-grid" method="POST" id="contactoForm">
@@ -315,7 +338,7 @@
           <textarea class="form-textarea" id="mensaje" name="mensaje" placeholder="Cuéntame sobre tu proyecto, negocio o idea..." required></textarea>
         </div>
 
-        <button class="form-submit" type="submit">Enviar mensaje →</button>
+        <button class="form-submit" type="submit">Enviar mensaje</button>
       </form>
 
       <div class="form-success" id="formSuccess" role="status" tabindex="-1">
@@ -323,10 +346,11 @@
         <div class="form-success-text">¡Mensaje enviado!</div>
         <div class="form-success-sub">Te respondo pronto a tu correo.</div>
       </div>
+      <p class="alt-wa">¿Prefieres algo más rápido? <a href="https://wa.me/522282347278" target="_blank" rel="noopener noreferrer">Escríbeme por WhatsApp</a></p>
     </div>
   </main>
 
-  <footer>© 2026 · Martínez de la Torre, Veracruz · Desarrollo Web &amp; Software</footer>
+  <footer>© 2026 Pytr, Martínez de la Torre, Veracruz</footer>
 
   <script>
     const form = document.getElementById('contactoForm');
